@@ -1,7 +1,12 @@
+import { Header } from '../components/template/Header';
+import useAppData from '../data/hook/useAppData';
+
 export default function Home() {
+  const { theme } = useAppData();
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </div>
+    <section className={`${theme}`}>
+      <Header title="Where in the world?" />
+    </section>
   );
 }
