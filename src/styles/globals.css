@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  /* Dark Mode Elements */
+  --DarkBlue     : hsl(209, 23%, 22%);
+  /* Dark Mode Background */
+  --VeryDark     : hsl(207, 26%, 17%);
+  /* Light Mode Text */
+  --VeryDarkBlue : hsl(200, 15%, 8%);
+  /* Light Mode Input */
+  --DarkGray     : hsl(0, 0%, 52%);
+  /* Light Mode Background */
+  --VeryLightGray: hsl(0, 0%, 98%);
+  /* Dark Mode Text & Light Mode Elements */
+  --White        : hsl(0, 0%, 100%);
+}
+
+html,
+body {
+  padding    : 0;
+  margin     : 0;
+  font-family: 'Nunito', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
