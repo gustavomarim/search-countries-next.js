@@ -14,8 +14,9 @@ export const Header = (props: HeaderProps) => {
       className={`
         flex justify-between 
         bg-white dark:bg-dark-blue
-        px-5 md:px-20 py-6 shadow-very-light-gray shadow-lg
-        dark:shadow-very-dark-blue dark:shadow-md
+        px-5 md:px-20 py-6 
+        shadow-very-light-gray shadow-lg
+        dark:shadow-very-dark-blue dark:shadow-lg
       `}
     >
       <Title title={props.title}></Title>
