@@ -15,8 +15,8 @@ export const Header = (props: HeaderProps) => {
         flex justify-between 
         bg-white dark:bg-dark-blue
         px-5 md:px-20 py-6 
-        shadow-very-light-gray shadow-lg
-        dark:shadow-very-dark-blue dark:shadow-lg
+        shadow-sm shadow-dark-gray 
+        dark:shadow-sm dark:shadow-very-dark
       `}
     >
       <Title title={props.title}></Title>
