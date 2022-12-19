@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ChangeEvent, useEffect, useState } from 'react';
 import useCountryData from '../../data/hook/useCountryData';
 import { Country } from '../../model/Country';
+import { Input } from './Input';
 
 interface ContentProps {
   children?: JSX.Element | JSX.Element[];
@@ -9,11 +11,27 @@ interface ContentProps {
 
 const Content = (props: ContentProps) => {
   const { countries } = useCountryData();
+  const [handleCountries, setHandleCountries] = useState<Country>();
+  const [search, setSearch] = useState('');
 
   // Next.js special function to load external image urls
   const myLoader = ({ src }: { src: string }) => {
     return `${src}`;
   };
+
+  function filterCountries({ target }: ChangeEvent<HTMLInputElement>): void {
+    const searchLowerCase = target.value.toLowerCase();
+    const filteredCountries = countries.filter(({ name }: Country) =>
+      name.toLocaleLowerCase().includes(searchLowerCase)
+    );
+
+    setSearch(searchLowerCase);
+    setHandleCountries(filteredCountries);
+  }
+
+  useEffect(() => {
+    setHandleCountries(countries);
+  }, [countries]);
 
   return (
     <section
@@ -23,6 +41,8 @@ const Content = (props: ContentProps) => {
         bg-very-light-gray dark:bg-very-dark-blue
       `}
     >
+      <Input value={search} onChange={filterCountries} />
+
       <ul
         className={`
           flex flex-wrap justify-between
@@ -30,8 +50,8 @@ const Content = (props: ContentProps) => {
           mt-10 
         `}
       >
-        {countries
-          ? countries.map(
+        {handleCountries
+          ? handleCountries.map(
               ({ name, population, region, capital, flags }: Country) => (
                 <li
                   key={name}
