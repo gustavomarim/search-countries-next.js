@@ -17,8 +17,9 @@ const CountryDetail = (props: ContentProps) => {
   const router = useRouter();
   const countryName = router.query.country;
 
-  const myLoader = ({ src }: { src: string }) => {
-    return `${src}`;
+  // Next.js special function to load external image urls
+  const myLoader = ({ src, width }: { src: string; width: number }): string => {
+    return `${src}?=${width}`;
   };
 
   useEffect(() => {

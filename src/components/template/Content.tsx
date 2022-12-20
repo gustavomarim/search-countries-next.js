@@ -15,8 +15,8 @@ const Content = (props: ContentProps) => {
   const [search, setSearch] = useState('');
 
   // Next.js special function to load external image urls
-  const myLoader = ({ src }: { src: string }) => {
-    return `${src}`;
+  const myLoader = ({ src, width }: { src: string; width: number }): string => {
+    return `${src}?=${width}`;
   };
 
   function filterCountries({ target }: ChangeEvent<HTMLInputElement>): void {
@@ -78,6 +78,7 @@ const Content = (props: ContentProps) => {
                         fill
                         sizes="auto"
                         className="rounded-t-md object-cover"
+                        priority={true}
                       />
                     </div>
 
