@@ -1,9 +1,10 @@
+import { Input } from 'components/forms/Input';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import useCountryData from '../../data/hook/useCountryData';
 import { Country } from '../../model/Country';
-import { Input } from './Input';
+import { DropdownFilter } from './DropdownFilter';
 
 interface ContentProps {
   children?: JSX.Element | JSX.Element[];
@@ -12,12 +13,7 @@ interface ContentProps {
 const Content = (props: ContentProps) => {
   const { countries } = useCountryData();
   const [handleCountries, setHandleCountries] = useState<Country>();
-  const [search, setSearch] = useState('');
-
-  // Next.js special function to load external image urls
-  const myLoader = ({ src, width }: { src: string; width: number }): string => {
-    return `${src}?=${width}`;
-  };
+  const [searchedCountry, setSearchedCountry] = useState<string>('');
 
   function filterCountries({ target }: ChangeEvent<HTMLInputElement>): void {
     const searchLowerCase = target.value.toLowerCase();
@@ -25,9 +21,28 @@ const Content = (props: ContentProps) => {
       name.toLocaleLowerCase().includes(searchLowerCase)
     );
 
-    setSearch(searchLowerCase);
+    setSearchedCountry(searchLowerCase);
     setHandleCountries(filteredCountries);
   }
+
+  function filterCountriesByRegion(event: MouseEvent<HTMLElement>): void {
+    const element = event.target;
+    if (element instanceof HTMLElement) {
+      const searchedRegionLowerCase = element.id.toLowerCase();
+
+      const countriesFilteredByRegion = countries.filter(
+        ({ region }: Country) =>
+          region.toLowerCase().includes(searchedRegionLowerCase)
+      );
+
+      setHandleCountries(countriesFilteredByRegion);
+    }
+  }
+
+  // Next.js special function to load external image urls
+  const myLoader = ({ src, width }: { src: string; width: number }): string => {
+    return `${src}?=${width}`;
+  };
 
   useEffect(() => {
     setHandleCountries(countries);
@@ -41,7 +56,14 @@ const Content = (props: ContentProps) => {
         bg-very-light-gray dark:bg-very-dark-blue
       `}
     >
-      <Input value={search} onChange={filterCountries} />
+      <article className="flex justify-between">
+        <Input value={searchedCountry} onChange={filterCountries} />
+
+        <DropdownFilter
+          label="Filter by Region"
+          onClick={filterCountriesByRegion}
+        />
+      </article>
 
       <ul
         className={`
