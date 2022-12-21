@@ -1,6 +1,6 @@
 import { SearchIcon } from '../icons/Index';
 
-export const Input = ({
+export const InputText = ({
   value,
   onChange,
 }: {
@@ -20,10 +20,14 @@ export const Input = ({
 
       <input
         className={`
-          placeholder:text-slate-400 block bg-white 
+          placeholder:text-slate-400 dark:placeholder:text-white
+          dark:text-white block 
+          bg-white dark:bg-dark-blue
+          shadow-md shadow-dark-gray 
+          dark:shadow-sm dark:shadow-very-dark
           rounded-lg 
           py-5 pl-9 pr-3 focus:outline-none
-          lg:w-1/3
+          w-96
         `}
         placeholder="Search for a country..."
         type="text"

@@ -1,4 +1,4 @@
-import { Input } from 'components/forms/Input';
+import { InputText } from 'components/forms/InputText';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
@@ -56,8 +56,8 @@ const Content = (props: ContentProps) => {
         bg-very-light-gray dark:bg-very-dark-blue
       `}
     >
-      <article className="flex justify-between">
-        <Input value={searchedCountry} onChange={filterCountries} />
+      <article className="flex justify-between my-6">
+        <InputText value={searchedCountry} onChange={filterCountries} />
 
         <DropdownFilter
           label="Filter by Region"
