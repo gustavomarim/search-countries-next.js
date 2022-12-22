@@ -12,7 +12,7 @@ export const ToggleThemeButton = (props: ToggleThemeButtonProps) => {
       className={`flex items-center cursor-pointer`}
     >
       <div className={`items-center justify-center`}>{SunIcon}</div>
-      <div className={`items-center ml-2 text-white`}>
+      <div className={`hidden sm:block items-center ml-2 text-white`}>
         <span className={`font-light text-base text-white text-center`}>
           Light Mode
         </span>
@@ -24,7 +24,7 @@ export const ToggleThemeButton = (props: ToggleThemeButtonProps) => {
       className={`flex items-center justify-center cursor-pointer`}
     >
       <div className={`items-center justify-center`}>{MoonIcon}</div>
-      <div className={`items-center ml-2 text-white`}>
+      <div className={`hidden sm:block items-center ml-2 text-white`}>
         <span
           className={`font-light text-center text-base text-very-dark-blue`}
         >

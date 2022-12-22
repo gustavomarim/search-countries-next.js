@@ -8,10 +8,10 @@ export const InputText = ({
   onChange: any;
 }) => {
   return (
-    <label className="relative inline-flex">
+    <label className="relative inline-flex w-full sm:w-2/6">
       <span
         className={`
-          flex items-center 
+          flex items-center  
           absolute inset-y-0 left-0 pl-2
         `}
       >
@@ -25,9 +25,9 @@ export const InputText = ({
           bg-white dark:bg-dark-blue
           shadow-md shadow-dark-gray 
           dark:shadow-sm dark:shadow-very-dark
-          rounded-lg 
           py-5 pl-9 pr-3 focus:outline-none
-          w-96
+          w-full
+          rounded-lg 
         `}
         placeholder="Search for a country..."
         type="text"

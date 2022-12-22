@@ -29,7 +29,6 @@ const Content = (props: ContentProps) => {
     const element = event.target;
     if (element instanceof HTMLElement) {
       const searchedRegionLowerCase = element.id.toLowerCase();
-
       const countriesFilteredByRegion = countries.filter(
         ({ region }: Country) =>
           region.toLowerCase().includes(searchedRegionLowerCase)
@@ -52,11 +51,16 @@ const Content = (props: ContentProps) => {
     <section
       className={`
         flex flex-col
-        px-20 py-6
+        px-10 lg:px-20 py-6
         bg-very-light-gray dark:bg-very-dark-blue
       `}
     >
-      <article className="flex justify-between my-6">
+      <article
+        className={`
+          flex flex-wrap gap-10 md:flex-nowrap justify-between 
+          md:my-6
+        `}
+      >
         <InputText value={searchedCountry} onChange={filterCountries} />
 
         <DropdownFilter
@@ -65,84 +69,86 @@ const Content = (props: ContentProps) => {
         />
       </article>
 
-      <ul
-        className={`
-          flex flex-wrap justify-between
-          gap-8 xl:gap-20
+      <section className="h-screen">
+        <ul
+          className={`
+          flex flex-wrap items-start justify-between
+          gap-8
           mt-10 
         `}
-      >
-        {handleCountries
-          ? handleCountries.map(
-              ({ name, population, region, capital, flags }: Country) => (
-                <li
-                  key={name}
-                  className={`
-                  w-72 lg:w-80
-                  rounded-md 
-                  bg-white dark:bg-dark-blue
-                  shadow-md shadow-dark-gray 
-                  dark:shadow-md dark:shadow-very-dark
+        >
+          {handleCountries
+            ? handleCountries.map(
+                ({ name, population, region, capital, flags }: Country) => (
+                  <li
+                    key={name}
+                    className={`
+                      w-72 lg:w-80
+                      rounded-md 
+                      bg-white dark:bg-dark-blue
+                      shadow-md shadow-dark-gray 
+                      dark:shadow-md dark:shadow-very-dark
                 `}
-                >
-                  <Link href={`/country/${name.toLocaleLowerCase()}`}>
-                    <div
-                      className={`
-                      h-40 lg:h-52 
-                      w-72 lg:w-80 
-                      relative
-                    `}
-                    >
-                      <Image
-                        loader={myLoader}
-                        src={`${flags.svg}`}
-                        alt={`${name} country flag`}
-                        fill
-                        sizes="auto"
-                        className="rounded-t-md object-cover"
-                        priority={true}
-                      />
-                    </div>
-
-                    <div
-                      className={`
-                      flex flex-col p-4 lg:p-6 gap-2 
-                      text-sm text-very-dark-blue dark:text-white
-                    `}
-                    >
-                      <h2
+                  >
+                    <Link href={`/country/${name.toLowerCase()}`}>
+                      <div
                         className={`
-                        font-semibold text-lg 
-                        mb-3
-                    `}
+                          h-40 lg:h-52 
+                          w-72 lg:w-80 
+                          relative
+                        `}
                       >
-                        {name}
-                      </h2>
-                      <p className="font-semibold">
-                        Population:{' '}
-                        <span className="font-light text-dark-gray">
-                          {population.toLocaleString('pt-BR')}
-                        </span>
-                      </p>
-                      <p className="font-semibold">
-                        Region:{' '}
-                        <span className="font-light text-dark-gray">
-                          {region}
-                        </span>
-                      </p>
-                      <p className="font-semibold pb-6">
-                        Capital:{' '}
-                        <span className="font-light text-dark-gray">
-                          {capital}
-                        </span>
-                      </p>
-                    </div>
-                  </Link>
-                </li>
+                        <Image
+                          loader={myLoader}
+                          src={`${flags.svg}`}
+                          alt={`${name} country flag`}
+                          fill
+                          sizes="auto"
+                          className="rounded-t-md object-cover border-b-2 border-b-very-light-gray dark:border-none"
+                          priority={true}
+                        />
+                      </div>
+
+                      <div
+                        className={`
+                          flex flex-col p-4 lg:p-6 gap-2 
+                          text-sm text-very-dark-blue dark:text-white
+                        `}
+                      >
+                        <h2
+                          className={`
+                            font-semibold text-lg 
+                            mb-3
+                          `}
+                        >
+                          {name}
+                        </h2>
+                        <p className="font-semibold">
+                          Population:{' '}
+                          <span className="font-light text-dark-gray">
+                            {population.toLocaleString('pt-BR')}
+                          </span>
+                        </p>
+                        <p className="font-semibold">
+                          Region:{' '}
+                          <span className="font-light text-dark-gray">
+                            {region}
+                          </span>
+                        </p>
+                        <p className="font-semibold pb-6">
+                          Capital:{' '}
+                          <span className="font-light text-dark-gray">
+                            {capital}
+                          </span>
+                        </p>
+                      </div>
+                    </Link>
+                  </li>
+                )
               )
-            )
-          : null}
-      </ul>
+            : null}
+        </ul>
+      </section>
 
       {props.children}
     </section>

@@ -35,7 +35,8 @@ export const DropdownFilter = ({
         shadow-md shadow-dark-gray 
         dark:shadow-sm dark:shadow-very-dark
         hover:bg-very-light-gray
-        rounded-md cursor-pointer 
+        rounded-md cursor-pointer
+        h-16 
       `}
       onClick={toggleDropdown}
     >

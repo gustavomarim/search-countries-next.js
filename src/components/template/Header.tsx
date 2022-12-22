@@ -13,8 +13,8 @@ export const Header = (props: HeaderProps) => {
     <header
       className={`
         flex justify-between 
+        px-10 md:px-20 py-6 
         bg-white dark:bg-dark-blue
-        px-5 md:px-20 py-6 
         shadow-sm shadow-dark-gray 
         dark:shadow-sm dark:shadow-very-dark
       `}

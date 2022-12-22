@@ -36,7 +36,12 @@ const CountryDetail = (props: ContentProps) => {
     >
       <Header title="Where in the world?" />
 
-      <section className={`px-5 md:px-20`}>
+      <section
+        className={`
+          h-screen px-10 md:px-20 
+          bg-white dark:bg-very-dark-blue
+        `}
+      >
         <BackPageButton />
 
         {country
@@ -54,14 +59,19 @@ const CountryDetail = (props: ContentProps) => {
                 borders,
                 flags,
               }: Country) => (
-                <div key={name} className={`grid grid-cols-2 gap-20 mt-16`}>
+                <div
+                  key={name}
+                  className={`
+                    grid grid-rows-2 grid-cols-1 gap-4 
+                    lg:grid-cols-2 lg:gap-20 mt-16
+                  `}
+                >
                   <Image
                     loader={myLoader}
                     src={`${flags.svg}`}
                     alt={`${name} country flag`}
                     width={700}
                     height={400}
-                    className=""
                   />
 
                   <div className={`grid grid-cols-2 grid-rows-2`}>
@@ -83,11 +93,7 @@ const CountryDetail = (props: ContentProps) => {
                         `}
                       >
                         Native Name:{' '}
-                        <span
-                          className={`
-                            font-light text-dark-gray
-                          `}
-                        >
+                        <span className={`font-light text-dark-gray`}>
                           {nativeName}
                         </span>
                       </p>
