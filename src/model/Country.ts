@@ -1,5 +1,4 @@
 export interface Country {
-  map(arg0: ({ name, population, region, capital, flags }: Country) => JSX.Element): import("react").ReactNode;
   name: string;
   nativeName: string;
   population: number;

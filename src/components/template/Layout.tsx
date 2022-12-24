@@ -4,14 +4,14 @@ import { Header } from './Header';
 
 interface LayoutProps {
   title: string;
-  children?: any;
+  children?: JSX.Element | JSX.Element[];
 }
 
 export const Layout = (props: LayoutProps) => {
   const { theme } = useAppData();
 
   return (
-    <main className={`${theme} h-full w-full`}>
+    <main className={`${theme}`}>
       <Header title={props.title} />
       <Content>{props.children}</Content>
     </main>

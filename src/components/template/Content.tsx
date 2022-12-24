@@ -12,13 +12,13 @@ interface ContentProps {
 
 const Content = (props: ContentProps) => {
   const { countries } = useCountryData();
-  const [handleCountries, setHandleCountries] = useState<Country>();
+  const [handleCountries, setHandleCountries] = useState<Country[]>();
   const [searchedCountry, setSearchedCountry] = useState<string>('');
 
   function filterCountries({ target }: ChangeEvent<HTMLInputElement>): void {
     const searchLowerCase = target.value.toLowerCase();
     const filteredCountries = countries.filter(({ name }: Country) =>
-      name.toLocaleLowerCase().includes(searchLowerCase)
+      name.toLowerCase().includes(searchLowerCase)
     );
 
     setSearchedCountry(searchLowerCase);
@@ -29,6 +29,7 @@ const Content = (props: ContentProps) => {
     const element = event.target;
     if (element instanceof HTMLElement) {
       const searchedRegionLowerCase = element.id.toLowerCase();
+
       const countriesFilteredByRegion = countries.filter(
         ({ region }: Country) =>
           region.toLowerCase().includes(searchedRegionLowerCase)
@@ -52,7 +53,7 @@ const Content = (props: ContentProps) => {
       className={`
         flex flex-col
         px-10 lg:px-20 py-6
-        bg-very-light-gray dark:bg-very-dark-blue
+       bg-very-light-gray dark:bg-very-dark-blue
       `}
     >
       <article
@@ -69,13 +70,13 @@ const Content = (props: ContentProps) => {
         />
       </article>
 
-      <section className="h-screen">
+      <section className="min-h-screen">
         <ul
           className={`
-          flex flex-wrap items-start justify-between
-          gap-8
-          mt-10 
-        `}
+            flex flex-wrap items-start justify-start
+            gap-8
+            mt-10
+          `}
         >
           {handleCountries
             ? handleCountries.map(
@@ -83,18 +84,18 @@ const Content = (props: ContentProps) => {
                   <li
                     key={name}
                     className={`
-                      w-72 lg:w-80
+                      w-full sm:w-72 lg:w-80
                       rounded-md 
                       bg-white dark:bg-dark-blue
                       shadow-md shadow-dark-gray 
                       dark:shadow-md dark:shadow-very-dark
-                `}
+                    `}
                   >
-                    <Link href={`/country/${name.toLowerCase()}`}>
+                    <Link href={`/country/${name.toLocaleLowerCase()}`}>
                       <div
                         className={`
                           h-40 lg:h-52 
-                          w-72 lg:w-80 
+                          sm:w-72 lg:w-80
                           relative
                         `}
                       >
@@ -104,7 +105,9 @@ const Content = (props: ContentProps) => {
                           alt={`${name} country flag`}
                           fill
                           sizes="auto"
-                          className="rounded-t-md object-cover border-b-2 border-b-very-light-gray dark:border-none"
+                          className={`
+                            rounded-t-md object-cover border-b-2  border-b-very-light-gray dark:border-none
+                          `}
                           priority={true}
                         />
                       </div>

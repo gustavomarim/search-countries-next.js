@@ -1,11 +1,11 @@
+import { BackPageButton } from 'components/template/BackPageButton';
+import { Header } from 'components/template/Header';
+import { Country } from 'model/Country';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { BackPageButton } from '../../components/template/BackPageButton';
-import { Header } from '../../components/template/Header';
 import useAppData from '../../data/hook/useAppData';
 import useCountryData from '../../data/hook/useCountryData';
-import { Country } from '../../model/Country';
 
 interface ContentProps {
   children?: unknown;
@@ -17,6 +17,12 @@ const CountryDetail = (props: ContentProps) => {
   const router = useRouter();
   const countryName = router.query.country;
 
+  //
+  function capitalizeFirstLetter(str: unknown): string {
+    if (typeof str !== 'string') return '';
+    return str.charAt(0).toUpperCase() + str.substring(1);
+  }
+
   // Next.js special function to load external image urls
   const myLoader = ({ src, width }: { src: string; width: number }): string => {
     return `${src}?=${width}`;
@@ -24,22 +30,24 @@ const CountryDetail = (props: ContentProps) => {
 
   useEffect(() => {
     handleCountry(countryName);
+    const capitalizedCountryName = capitalizeFirstLetter(countryName);
+    document.title = `${capitalizedCountryName} | Search Country`;
   }, [countryName, handleCountry]);
 
   return (
     <div
       className={`
         ${theme} 
-        w-screen h-screen
         ${theme === 'dark' ? 'bg-very-dark-blue' : 'bg-very-light-gray'}
+        h-screen
       `}
     >
       <Header title="Where in the world?" />
 
       <section
         className={`
-          h-screen px-10 md:px-20 
-          bg-white dark:bg-very-dark-blue
+         px-10 md:px-20 
+        bg-very-light-gray dark:bg-very-dark-blue
         `}
       >
         <BackPageButton />
@@ -62,7 +70,8 @@ const CountryDetail = (props: ContentProps) => {
                 <div
                   key={name}
                   className={`
-                    grid grid-rows-2 grid-cols-1 gap-4 
+                    flex flex-wrap justify-start
+                    md:grid grid-rows-2 grid-cols-1 gap-4 
                     lg:grid-cols-2 lg:gap-20 mt-16
                   `}
                 >
@@ -72,9 +81,18 @@ const CountryDetail = (props: ContentProps) => {
                     alt={`${name} country flag`}
                     width={700}
                     height={400}
+                    className={`
+                      rounded-sm
+                      shadow-md shadow-dark-gray 
+                      dark:shadow-md dark:shadow-very-dark
+                    `}
                   />
 
-                  <div className={`grid grid-cols-2 grid-rows-2`}>
+                  <div
+                    className={`
+                      sm:grid grid-cols-2 grid-rows-2 gap-3
+                    `}
+                  >
                     <h1
                       className={`
                         col-span-full self-center
