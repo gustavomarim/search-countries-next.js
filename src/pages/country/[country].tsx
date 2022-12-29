@@ -3,7 +3,7 @@ import { Header } from 'components/template/Header';
 import { Country } from 'model/Country';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import useAppData from '../../data/hook/useAppData';
 import useCountryData from '../../data/hook/useCountryData';
 
@@ -13,7 +13,7 @@ interface ContentProps {
 
 const CountryDetail = (props: ContentProps) => {
   const { theme } = useAppData();
-  const { country, handleCountry } = useCountryData();
+  const { country, handleCountry, fetchCountryByCode } = useCountryData();
   const router = useRouter();
   const countryName = router.query.country;
 
@@ -27,6 +27,15 @@ const CountryDetail = (props: ContentProps) => {
   const myLoader = ({ src, width }: { src: string; width: number }): string => {
     return `${src}?=${width}`;
   };
+
+  async function handleCountryByCode(event: MouseEvent<HTMLElement>) {
+    const element = event.target;
+    if (element instanceof HTMLElement) {
+      const country = element.id.toLowerCase();
+      const { name } = await fetchCountryByCode(country.toLowerCase());
+      router.push(`/country/${name.toLowerCase()}`);
+    }
+  }
 
   useEffect(() => {
     handleCountry(countryName);
@@ -213,6 +222,7 @@ const CountryDetail = (props: ContentProps) => {
                       </p>
                       {borders?.map((country) => (
                         <li
+                          id={country}
                           key={country}
                           className={`
                             text-center text-very-dark dark:text-dark-gray
@@ -220,7 +230,10 @@ const CountryDetail = (props: ContentProps) => {
                             py-1 px-3 rounded
                             shadow-sm shadow-dark-gray 
                             dark:shadow-sm dark:shadow-very-dark
+                            cursor-pointer
+                            transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-x-110 duration-300
                           `}
+                          onClick={handleCountryByCode}
                         >
                           {country}
                         </li>
