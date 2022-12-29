@@ -13,6 +13,8 @@ export const BackPageButton = () => {
         bg-white dark:bg-dark-blue
         shadow-sm shadow-dark-gray 
         dark:shadow-sm dark:shadow-very-dark
+        transition ease-in-out delay-150 
+        hover:scale-x-105 hover:scale-y-105 duration-150
       `}
       onClick={goBack}
     >

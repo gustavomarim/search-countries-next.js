@@ -12,22 +12,53 @@ export const CountryProvider = ({ children }: CountryProviderProps) => {
 
   const [countries, setCountries] = useState<Country>();
   const [country, setCountry] = useState<Country>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleCountries(): Promise<void> {
-    const response = await fetch(`${BASE_URL}/all`);
-    const data = await response.json();
-    setCountries(data);
+    try {
+      setError(null);
+      setLoading(true);
+      const response = await fetch(`${BASE_URL}/all`);
+      if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+      const data = await response.json();
+      setCountries(data);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function handleCountry(country: string): Promise<void> {
-    const response = await fetch(`${BASE_URL}/name/${country}`);
-    const data = await response.json();
-    setCountry(data);
+    try {
+      setError(null);
+      setLoading(true);
+      const response = await fetch(`${BASE_URL}/name/${country}`);
+      if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+      const data = await response.json();
+      setCountry(data);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function fetchCountryByCode(code: string): Promise<Country> {
-    const response = await fetch(`${BASE_URL}/alpha/${code}`);
-    const data = await response.json();
+    let data;
+    try {
+      setError(null);
+      setLoading(true);
+      const response = await fetch(`${BASE_URL}/alpha/${code}`);
+      if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+      data = await response.json();
+      return data;
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+    } finally {
+      setLoading(false);
+    }
     return data;
   }
 
@@ -45,6 +76,8 @@ export const CountryProvider = ({ children }: CountryProviderProps) => {
         handleCountries,
         handleCountry,
         fetchCountryByCode,
+        loading,
+        error,
       }}
     >
       {children}
