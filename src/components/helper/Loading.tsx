@@ -9,7 +9,14 @@ export const Loading = () => {
         bg-very-light-gray dark:bg-very-dark-blue
       `}
     >
-      <div className="animate-spin text-very-dark dark:text-very-light-gray">{ArrowPath(10)}</div>
+      <div
+        className={`
+          animate-spin 
+          text-very-dark dark:text-very-light-gray
+        `}
+      >
+        {ArrowPath(10)}
+      </div>
     </div>
   );
 };

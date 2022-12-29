@@ -11,17 +11,17 @@ export const Header = (props: HeaderProps) => {
   const { theme, toggleTheme } = useAppData();
 
   return (
-    <Link href="/">
-      <header
-        className={`
+    <header
+      className={`
         flex justify-between 
         px-10 md:px-20 py-6 
         bg-white dark:bg-dark-blue
-      `}
-      >
+        `}
+    >
+      <Link href="/">
         <Title title={props.title}></Title>
-        <ToggleThemeButton theme={theme} toggleTheme={toggleTheme} />
-      </header>
-    </Link>
+      </Link>
+      <ToggleThemeButton theme={theme} toggleTheme={toggleTheme} />
+    </header>
   );
 };

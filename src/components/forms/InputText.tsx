@@ -1,3 +1,4 @@
+import { ChangeEventHandler } from 'react';
 import { SearchIcon } from '../icons/Index';
 
 export const InputText = ({
@@ -5,7 +6,7 @@ export const InputText = ({
   onChange,
 }: {
   value: string;
-  onChange: any;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 }) => {
   return (
     <label className="relative inline-flex w-full sm:w-2/6">

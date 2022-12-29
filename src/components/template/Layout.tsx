@@ -1,5 +1,5 @@
 import useAppData from '../../data/hook/useAppData';
-import Content from './Content';
+import { Content } from './Content';
 import { Header } from './Header';
 
 interface LayoutProps {

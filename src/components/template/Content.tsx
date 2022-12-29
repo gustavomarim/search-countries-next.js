@@ -15,7 +15,7 @@ interface ContentProps {
 export const Content = (props: ContentProps) => {
   const { countries, error, loading } = useCountryData();
   const [handleCountries, setHandleCountries] = useState<Country[]>();
-  const [searchedCountry, setSearchedCountry] = useState<string>();
+  const [searchedCountry, setSearchedCountry] = useState<string>('');
 
   function filterCountries({ target }: ChangeEvent<HTMLInputElement>): void {
     const searchLowerCase = target.value.toLowerCase();
@@ -63,9 +63,10 @@ export const Content = (props: ContentProps) => {
       >
         <article
           className={`
-          flex flex-wrap gap-10 md:flex-nowrap justify-between 
-          md:my-6
-        `}
+            flex flex-wrap gap-10 md:flex-nowrap 
+            justify-between 
+            md:my-6
+          `}
         >
           <InputText value={searchedCountry} onChange={filterCountries} />
 
@@ -154,15 +155,8 @@ export const Content = (props: ContentProps) => {
               : null}
           </ul>
         </section>
-
         {props.children}
       </section>
     );
+  return null;
 };
-function useState<T>(): [any, any] {
-  throw new Error('Function not implemented.');
-}
-
-function useEffect(arg0: () => void, arg1: any[]) {
-  throw new Error('Function not implemented.');
-}

@@ -46,8 +46,8 @@ const CountryDetail = (props: ContentProps) => {
     document.title = `${capitalizedCountryName} | Search Country`;
   }, [countryName]);
 
-  if (error) return <Error error={error} />;
   if (loading) return <Loading />;
+  if (error) return <Error error={error} />;
   if (country)
     return (
       <div
@@ -96,11 +96,12 @@ const CountryDetail = (props: ContentProps) => {
                       alt={`${name} country flag`}
                       width={700}
                       height={400}
+                      priority={true}
                       className={`
-                      rounded-sm
-                      shadow-md shadow-dark-gray 
-                      dark:shadow-md dark:shadow-very-dark
-                    `}
+                        rounded-sm
+                        shadow-md shadow-dark-gray 
+                        dark:shadow-md dark:shadow-very-dark
+                      `}
                     />
 
                     <div
