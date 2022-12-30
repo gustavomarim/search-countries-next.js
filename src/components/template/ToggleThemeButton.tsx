@@ -8,6 +8,7 @@ interface ToggleThemeButtonProps {
 export const ToggleThemeButton = (props: ToggleThemeButtonProps) => {
   return props.theme === 'dark' ? (
     <button
+      aria-label="toggle-theme"
       onClick={props.toggleTheme}
       className={`flex items-center cursor-pointer`}
     >
@@ -20,6 +21,7 @@ export const ToggleThemeButton = (props: ToggleThemeButtonProps) => {
     </button>
   ) : (
     <button
+      aria-label="toggle-theme"
       onClick={props.toggleTheme}
       className={`flex items-center justify-center cursor-pointer`}
     >

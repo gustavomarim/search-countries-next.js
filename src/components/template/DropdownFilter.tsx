@@ -51,8 +51,7 @@ export const DropdownFilter = ({
       </p>
 
       <div className="relative">
-        <button
-          type="button"
+        <i
           className={`
             inline-flex items-center justify-center 
             h-full px-2 
@@ -61,7 +60,7 @@ export const DropdownFilter = ({
           `}
         >
           {ChevronDown(6)}
-        </button>
+        </i>
 
         <div
           className={`

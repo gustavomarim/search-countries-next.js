@@ -7,6 +7,7 @@ export const BackPageButton = () => {
 
   return (
     <button
+      aria-label="back-page"
       className={`
         flex gap-3 px-12 py-3 rounded-md mt-16
         text-base text-very-dark dark:text-white
